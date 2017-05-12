@@ -78,7 +78,7 @@
                           
                           </div>
                         
-                        <h4 class="modal-title" >Setores Vinculados <button id="b1" class="btn add-more" type="button">Add Setor</button></h4> 
+                        <h4 class="modal-title" >Setores Vinculados <button id="add" class="btn btn-info" type="button">Add Setor</button></h4> 
                         
                         <div class="form-group">
                             
@@ -88,16 +88,8 @@
                             </div>
                             <div id="container2" class="col-sm-2"/>
                             <br>  
-                            <div id="field"></div>
-                        </div>   <!--/here teh addclass has-error will appear -->
-                                                   
-
-                          
-                       
-                          
-                          
-                        
-                        
+                            <div id="fieldw"></div>
+                        </div>   <!--/here teh addclass has-error will appear -->         
                     
                     <div class="modal-footer editMemberModal">
                         <br><br><br><br><br><br>
@@ -112,8 +104,64 @@
 	      
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->
+	</div>
+        </div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
 	<!-- /edit modal -->
+        
+        <!-- /VINCULAR SETOR -->
+        
+        <div class="modal fade" tabindex="-1" role="dialog" id="editMemberModal">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">	        
+	        <h4 class="modal-title"><span class="glyphicon glyphicon-edit"></span> Vincular Setor</h4>                
+	      </div>
+
+		<form class="form-horizontal" action="atualizar" method="POST" id="updateMemberForm" >	      
+
+                    <div class="modal-body">
+                        
+                        <div class="edit-messages"></div>
+                          <div class="form-group"> <!--/here teh addclass has-error will appear -->
+                          <label for="editNome" class="col-sm-2 control-label">Usuário</label>
+                          <div class="col-sm-10"> 
+                            <input type="text" class="form-control" id="editNome" name="nome" placeholder="Usuário" readonly>
+                              <!-- here the text will apper  -->
+                          </div>                      
+                          
+                          
+                          </div>
+                        
+                        <h4 class="modal-title" >Setores Vinculados <button id="add" class="btn btn-info" type="button">Add Setor</button></h4> 
+                        
+                        <div class="form-group">
+                            
+                            <label for="editNome" class="col-sm-2 control-label"></label>
+                            <div class="col-sm-8" id="container">
+                                
+                            </div>
+                            <div id="container2" class="col-sm-2"/>
+                            <br>  
+                            <div id="fieldw"></div>
+                        </div>   <!--/here teh addclass has-error will appear -->         
+                    
+                    <div class="modal-footer editMemberModal">
+                        <br><br><br><br><br><br>
+                        <button type="button" class="btn btn-default" id="modal"  data-modal="modal" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary" > Salvar alterações</button>
+                    </div>
+                    </form>
+
+                   
+                        
+	      
+	      
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div>
+        </div><!-- /.modal-dialog -->
+	</div>
 
 	
 </body>

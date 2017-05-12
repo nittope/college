@@ -233,37 +233,9 @@ function editMember(id) {
                                     container2.appendChild(document.createElement("br"));
                                     container2.appendChild(document.createElement("br"));
                                     container.appendChild(document.createElement("br"));
-                                }
+                                }                              
                                 
                                 
-                                //Adicionar Campos Função
-                                
-                                var next = 1;
-                                $(".add-more").click(function(e){
-                                    e.preventDefault();
-                                    var addto = "#field" + next;
-                                    var addRemove = "#field" + (next);
-                                    next = next + 1;
-                                    var newIn = '<input autocomplete="off" class="input form-control" id="field' + next + '" name="field' + next + '" type="text">';
-                                    var newInput = $(newIn);
-                                    var removeBtn = '<button id="remove' + (next - 1) + '" class="btn btn-danger remove-me" >-</button></div><div id="field">';
-                                    var removeButton = $(removeBtn);
-                                    $(addto).after(newInput);
-                                    $(addRemove).after(removeButton);
-                                    $("#field" + next).attr('data-source',$(addto).attr('data-source'));
-                                    $("#count").val(next);  
-
-                                        $('.remove-me').click(function(e){
-                                            e.preventDefault();
-                                            var fieldNum = this.id.charAt(this.id.length-1);
-                                            var fieldID = "#field" + fieldNum;
-                                            $(this).remove();
-                                            $(fieldID).remove();
-                                        });
-                                });
-    
-                                
-                                //
                                 
 								
 
@@ -345,6 +317,154 @@ function editMember(id) {
                 });// /fetch selected member info
               
 }
+
+//Adicionar Setor!
+
+function addMember(id) {
+	             
+                
+		// remove the error 
+		$(".form-group").removeClass('has-error').removeClass('has-success');
+		$(".text-danger").remove();
+		// empty the message div
+		$(".edit-messages").html("");
+
+		// remove the id
+		$("#id").remove();
+
+		// fetch the member data
+		$.ajax({
+			url: 'consultarPorId',
+			type: 'get',
+			data: {id : id},
+			dataType: 'json',
+			"success" :  function(response){
+				$.each(response, function(ind, obj){
+					
+					
+											
+					var nome = obj.nome;
+                                        var descricao = obj.descricao;
+                                        
+                                        
+                                        
+					
+				
+		
+                                $("#editNome").val(obj.nome);
+                                
+                                
+                                var number = obj.setores.length;
+                                var container = document.getElementById("container");
+                                var container2 = document.getElementById("container2");  
+                                while (container.hasChildNodes()) {
+                                    container.removeChild(container.lastChild);
+                                }
+                                while (container2.hasChildNodes()) {
+                                    container2.removeChild(container2.lastChild);
+                                }
+                                for (i=0;i<number;i++){                                    
+                                    var input = document.createElement("input");
+                                    var button = document.createElement("input");
+                                    container2.appendChild(document.createElement("br"));
+                                    container.appendChild(document.createElement("br"));
+                                    input.type = "text";
+                                    input.value = obj.setores[i];
+                                    input.name = "obj.setores[]";
+                                    input.className = "form-control";
+                                    input.setAttribute('readonly',true);
+                                    container.appendChild(input);                                    
+                                                                     
+                                    
+                                    button.type = "button";
+                                    button.value = "Remover";
+                                    button.name = obj.setores[i];
+                                    button.className = "btn btn-danger";
+                                    container2.appendChild(button);
+                                    
+                                    container2.appendChild(document.createElement("br"));
+                                    container2.appendChild(document.createElement("br"));
+                                    container.appendChild(document.createElement("br"));
+                                }                              
+                                
+                                
+                                
+								
+
+				// mmeber id 
+				$(".editMemberModal").append('<input type="hidden" name="id" id="id" value="'+id+'"/>');
+                                $("#editMemberModal").modal('show');
+                                
+                                
+                                
+				// here update the member data
+				$("#updateMemberForm").unbind('submit').bind('submit', '.table', function(e) {
+					// remove error messages
+					$(".text-danger").remove();
+
+					var form = $(this);
+
+					// validation
+					var editNome = $("#editNome").val();
+					
+
+					if(editNome == "") {
+						$("#editNome").closest('.form-group').addClass('has-error');
+						$("#editNome").after('<p class="text-danger">The Name field is required</p>');
+					} else {
+						$("#editNome").closest('.form-group').removeClass('has-error');
+						$("#editNome").closest('.form-group').addClass('has-success');				
+					}
+
+					
+
+					if(editNome) {
+						$.ajax({
+							url: form.attr('action'),
+							type: form.attr('method'),
+							data: form.serialize(),
+							dataType: 'json',
+							success:function(response) {
+								if(response.success == true) {
+									$(".edit-messages").html('<div class="alert alert-success alert-dismissible" role="alert">'+
+									  '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+									  '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>'+response.messages+
+									'</div>');
+
+									// reload the datatables
+									
+									// this function is built in function of datatables;
+
+									// remove the error 
+									$(".form-group").removeClass('has-success').removeClass('has-error');
+									$(".text-danger").remove();
+                                                                        
+                                                                        
+                                                                        
+								} else {
+									$(".edit-messages").html('<div class="alert alert-warning alert-dismissible" role="alert">'+
+									  '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+									  '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>'+response.messages+
+									'</div>')
+								}
+                                                                
+							}
+                                                       // /success
+						}); // /ajax
+                                                 
+					} // /if
+                                
+                                
+				});
+                        }); 
+                        
+			} // /success
+		
+                });// /fetch selected member info
+              
+}
+
+
 
 
 

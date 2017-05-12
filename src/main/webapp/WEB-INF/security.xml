@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans 
+    xmlns="http://www.springframework.org/schema/security"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+    
+    <http auto-config="true" use-expressions="true"> 
+        <intercept-url pattern="/" access="permitAll"/>
+        <intercept-url pattern="/login/" access="permitAll"/>
+        <intercept-url pattern="/login.jsp" access="permitAll"/>
+        <intercept-url pattern="/logout.jsp" access="permitAll"/>
+         <intercept-url pattern="/resources/*/*" access="permitAll"/>
+        <intercept-url pattern="/index.jsp" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/*/*/*" access="ROLE_ADMIN"/>
+        
+        <form-login login-page="/login.jsp"
+                      login-processing-url="/fazerLogin"
+                      authentication-failure-url="/login.jsp?error"
+                      default-target-url="/index.jsp"/>
+                      
+        <logout logout-url="/logout" logout-success-url="/login.jsp?logout"/>
+    </http> 
+    <authentication-manager>
+        <authentication-provider>
+            <jdbc-user-service data-source-ref="dataSource"
+                users-by-username-query="SELECT nome, senha, 'true' as enable FROM usuario WHERE senha=?"
+                
+                authorities-by-username-query="SELECT nome, authority FROM usuario WHERE senha=?"
+            />
+        </authentication-provider>
+    </authentication-manager>
+    <beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+        <beans:property name="url" value="jdbc:mysql://localhost:3306/col" />
+        <beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <beans:property name="username" value="root" />
+        <beans:property name="password" value="" />
+    </beans:bean>
+</beans:beans>

@@ -24,5 +24,7 @@ public void remover(Setor setor) throws SetorInexistenteException;
 public List<SetorListar> listarTodos();
 public List<SetorListar> ConsultarPorNome(String nome) throws SetorInexistenteException;
 public List<SetorListar> ConsultarPorID(Long id) throws SetorInexistenteException;
+
+public Setor ConsultarPorIdU(Long id) throws SetorInexistenteException;
     
 }

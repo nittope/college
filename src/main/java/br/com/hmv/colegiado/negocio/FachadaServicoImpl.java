@@ -9,6 +9,7 @@ import br.com.hmv.colegiado.exception.UsuarioExistenteException;
 import br.com.hmv.colegiado.exception.UsuarioInexistenteException;
 import br.com.hmv.colegiado.entidade.Cabecalho;
 import br.com.hmv.colegiado.entidade.Competencia;
+import br.com.hmv.colegiado.entidade.DadoIndicador;
 import br.com.hmv.colegiado.entidade.Funcao;
 import br.com.hmv.colegiado.entidade.Indicador;
 import br.com.hmv.colegiado.entidade.Setor;
@@ -17,6 +18,8 @@ import br.com.hmv.colegiado.exception.CabecalhoExistenteException;
 import br.com.hmv.colegiado.exception.CabecalhoInexistenteException;
 import br.com.hmv.colegiado.exception.CompetenciaExistenteException;
 import br.com.hmv.colegiado.exception.CompetenciaInexistenteException;
+import br.com.hmv.colegiado.exception.DadoIndicadorExistenteException;
+import br.com.hmv.colegiado.exception.DadoIndicadorInexistenteException;
 import br.com.hmv.colegiado.exception.FuncaoExistenteException;
 import br.com.hmv.colegiado.exception.FuncaoInexistenteException;
 import br.com.hmv.colegiado.exception.IndicadorExistenteException;
@@ -25,6 +28,7 @@ import br.com.hmv.colegiado.exception.SetorExistenteException;
 import br.com.hmv.colegiado.exception.SetorInexistenteException;
 import br.com.hmv.colegiado.listar.CabecalhoListar;
 import br.com.hmv.colegiado.listar.CompetenciaListar;
+import br.com.hmv.colegiado.listar.DadoIndicadorListar;
 import br.com.hmv.colegiado.listar.FuncaoListar;
 import br.com.hmv.colegiado.listar.IndicadorListar;
 import br.com.hmv.colegiado.listar.SetorListar;
@@ -57,6 +61,9 @@ public class FachadaServicoImpl implements FachadaServico {
 
     @Autowired
     private ServicoCompetencia servicoCompetencia;
+    
+    @Autowired
+    private ServicoDadoIndicador servicoDadoIndicador;
     
     //Função
     @Override
@@ -254,6 +261,36 @@ public class FachadaServicoImpl implements FachadaServico {
     @Override
     public List<CompetenciaListar> ConsultarCompetenciaPorID(Long id) throws CompetenciaInexistenteException {
         return servicoCompetencia.ConsultarPorID(id);
+    }
+
+    @Override
+    public void cadastrarDadoIndicador(DadoIndicador dadoIndicador, Long idSetor, Long idCompetencia, Long idUsuario, Long idCabecalho, Long idIndicador) throws DadoIndicadorExistenteException, DadoIndicadorInexistenteException, SetorInexistenteException, CompetenciaInexistenteException, UsuarioInexistenteException, CabecalhoInexistenteException, IndicadorInexistenteException {
+        servicoDadoIndicador.cadastrar(dadoIndicador, idSetor, idCompetencia, idUsuario, idCabecalho, idIndicador);
+    }
+
+    @Override
+    public void atualizarDadoIndicador(DadoIndicador dadoIndicador, Long idSetor, Long idCompetencia, Long idUsuario, Long idCabecalho, Long idIndicador) throws DadoIndicadorInexistenteException, SetorInexistenteException, CompetenciaInexistenteException, UsuarioInexistenteException, CabecalhoInexistenteException, IndicadorInexistenteException {
+        servicoDadoIndicador.atualizar(dadoIndicador, idSetor, idCompetencia, idUsuario, idCabecalho, idIndicador);
+    }
+
+    @Override
+    public void removerDadoIndicador(DadoIndicador dadoIndicador) throws DadoIndicadorInexistenteException {
+        
+    }
+
+    @Override
+    public List<DadoIndicadorListar> listarTodosOsDadoIndicadores() {
+        return servicoDadoIndicador.listarTodos();
+    }
+
+    @Override
+    public List<DadoIndicadorListar> ConsultarDadoIndicadorPorNome(String nome) throws DadoIndicadorInexistenteException {
+        return servicoDadoIndicador.ConsultarPorNome(nome);
+    }
+
+    @Override
+    public List<DadoIndicadorListar> ConsultarDadoIndicadorPorID(Long id) throws DadoIndicadorInexistenteException {
+        return servicoDadoIndicador.ConsultarPorID(id);
     }
 
    

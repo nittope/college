@@ -145,5 +145,13 @@ public class ServicoUsuarioImpl implements ServicoUsuario{
         retorno.add(ul);
         return retorno; 
     }
+
+    @Override
+    public Usuario ConsultarPorIdU(Long id) throws UsuarioInexistenteException {
+        Usuario usuarioAtualizar = repositorioUsuario.findById(id);
+        if(usuarioAtualizar==null || !usuarioAtualizar.isAtivo())
+            throw new UsuarioInexistenteException();
+        return usuarioAtualizar; 
+    }
     
 }

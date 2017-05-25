@@ -25,4 +25,6 @@ public interface ServicoCabecalho extends Serializable {
     public List<CabecalhoListar> ConsultarPorNome(String nome) throws CabecalhoInexistenteException;
     public List<CabecalhoListar> ConsultarPorID(Long id) throws CabecalhoInexistenteException;
     
+    public Cabecalho ConsultarPorIdU(Long id) throws CabecalhoInexistenteException;
+    
 }

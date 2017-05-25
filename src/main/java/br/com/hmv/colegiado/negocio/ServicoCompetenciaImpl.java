@@ -130,5 +130,13 @@ public class ServicoCompetenciaImpl implements ServicoCompetencia {
     
     return retorno; 
     }
+
+    @Override
+    public Competencia ConsultarPorIdU(Long id) throws CompetenciaInexistenteException {
+        Competencia competenciaAtualizar = repositorioCompetencia.findById(id);
+        if(competenciaAtualizar==null || !competenciaAtualizar.isAtivo())
+            throw new CompetenciaInexistenteException();
+        return competenciaAtualizar; 
+    }
     
 }

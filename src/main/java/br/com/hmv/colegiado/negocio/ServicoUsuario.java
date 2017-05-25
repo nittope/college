@@ -25,4 +25,6 @@ public interface ServicoUsuario extends Serializable {
     public List<UsuarioListar> listarTodos();
     public List<UsuarioListar> ConsultarPorNome(String nome) throws UsuarioInexistenteException;
     public List<UsuarioListar> ConsultarPorID(Long id) throws UsuarioInexistenteException;
+    
+    public Usuario ConsultarPorIdU(Long id) throws UsuarioInexistenteException;
 }

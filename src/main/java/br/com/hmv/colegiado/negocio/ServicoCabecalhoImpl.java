@@ -109,5 +109,13 @@ public class ServicoCabecalhoImpl implements ServicoCabecalho {
     
     return retorno; 
     }
+
+    @Override
+    public Cabecalho ConsultarPorIdU(Long id) throws CabecalhoInexistenteException {
+        Cabecalho cabecalhoAtualizar = repositorioCabecalho.findById(id);
+        if(cabecalhoAtualizar==null || !cabecalhoAtualizar.isAtivo())
+            throw new CabecalhoInexistenteException();
+        return cabecalhoAtualizar; 
+    }
     
 }

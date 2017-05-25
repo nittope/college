@@ -115,6 +115,14 @@ public class ServicoIndicadorImpl implements ServicoIndicador {
     
     return retorno; 
     }
+
+    @Override
+    public Indicador ConsultarPorIdU(Long id) throws IndicadorInexistenteException {
+        Indicador indicadorAtualizar = repositorioIndicador.findById(id);
+        if(indicadorAtualizar==null || !indicadorAtualizar.isAtivo())
+            throw new IndicadorInexistenteException();
+        return indicadorAtualizar; 
+    }
     }
     
 

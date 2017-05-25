@@ -25,4 +25,6 @@ public interface ServicoIndicador extends Serializable{
     public List<IndicadorListar> ConsultarPorNome(String nome) throws IndicadorInexistenteException;
     public List<IndicadorListar> ConsultarPorID(Long id) throws IndicadorInexistenteException;
     
+    public Indicador ConsultarPorIdU(Long id) throws IndicadorInexistenteException;
+    
 }

@@ -10,6 +10,7 @@ import br.com.hmv.colegiado.exception.UsuarioExistenteException;
 import br.com.hmv.colegiado.exception.UsuarioInexistenteException;
 import br.com.hmv.colegiado.entidade.Cabecalho;
 import br.com.hmv.colegiado.entidade.Competencia;
+import br.com.hmv.colegiado.entidade.DadoIndicador;
 import br.com.hmv.colegiado.entidade.Funcao;
 import br.com.hmv.colegiado.entidade.Indicador;
 import br.com.hmv.colegiado.entidade.Setor;
@@ -18,6 +19,8 @@ import br.com.hmv.colegiado.exception.CabecalhoExistenteException;
 import br.com.hmv.colegiado.exception.CabecalhoInexistenteException;
 import br.com.hmv.colegiado.exception.CompetenciaExistenteException;
 import br.com.hmv.colegiado.exception.CompetenciaInexistenteException;
+import br.com.hmv.colegiado.exception.DadoIndicadorExistenteException;
+import br.com.hmv.colegiado.exception.DadoIndicadorInexistenteException;
 import br.com.hmv.colegiado.exception.FuncaoExistenteException;
 import br.com.hmv.colegiado.exception.FuncaoInexistenteException;
 import br.com.hmv.colegiado.exception.IndicadorExistenteException;
@@ -26,6 +29,7 @@ import br.com.hmv.colegiado.exception.SetorExistenteException;
 import br.com.hmv.colegiado.exception.SetorInexistenteException;
 import br.com.hmv.colegiado.listar.CabecalhoListar;
 import br.com.hmv.colegiado.listar.CompetenciaListar;
+import br.com.hmv.colegiado.listar.DadoIndicadorListar;
 import br.com.hmv.colegiado.listar.FuncaoListar;
 import br.com.hmv.colegiado.listar.IndicadorListar;
 import br.com.hmv.colegiado.listar.SetorListar;
@@ -89,4 +93,13 @@ public interface FachadaServico extends Serializable{
     public List<CompetenciaListar> listarTodasAsCompetencias();
     public List<CompetenciaListar> ConsultarCompetenciaPorNome(String nome) throws CompetenciaInexistenteException;
     public List<CompetenciaListar> ConsultarCompetenciaPorID(Long id) throws CompetenciaInexistenteException;
+    
+    //DadoIndicador
+    
+    public void cadastrarDadoIndicador(DadoIndicador dadoIndicador, Long idSetor, Long idCompetencia, Long idUsuario, Long idCabecalho, Long idIndicador) throws DadoIndicadorExistenteException, DadoIndicadorInexistenteException, SetorInexistenteException, CompetenciaInexistenteException, UsuarioInexistenteException, CabecalhoInexistenteException, IndicadorInexistenteException;
+    public void atualizarDadoIndicador(DadoIndicador dadoIndicador, Long idSetor, Long idCompetencia, Long idUsuario, Long idCabecalho, Long idIndicador) throws DadoIndicadorInexistenteException, SetorInexistenteException, CompetenciaInexistenteException, UsuarioInexistenteException, CabecalhoInexistenteException, IndicadorInexistenteException;
+    public void removerDadoIndicador(DadoIndicador dadoIndicador) throws DadoIndicadorInexistenteException;
+    public List<DadoIndicadorListar> listarTodosOsDadoIndicadores();
+    public List<DadoIndicadorListar> ConsultarDadoIndicadorPorNome(String nome) throws DadoIndicadorInexistenteException;
+    public List<DadoIndicadorListar> ConsultarDadoIndicadorPorID(Long id) throws DadoIndicadorInexistenteException;
 }

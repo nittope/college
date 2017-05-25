@@ -25,6 +25,9 @@ public interface RepositorioDadoIndicador extends CrudRepository<DadoIndicador, 
  public List<DadoIndicador> consultarPorSetor(@Param("nomeSetor") String nomeSetor);   
  
  @Query("select d from DadoIndicador d where d.usuario.nome=:nomeUsuario ")
- public List<DadoIndicador> consultarPorUsuario(@Param("nomeUsuario") String nomeUsuario);   
+ public List<DadoIndicador> consultarPorUsuario(@Param("nomeUsuario") String nomeUsuario);
+ 
+ 
+ public DadoIndicador findById(Long id);
     
 }

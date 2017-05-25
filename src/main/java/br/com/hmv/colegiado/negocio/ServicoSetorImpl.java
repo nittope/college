@@ -137,5 +137,13 @@ public class ServicoSetorImpl implements ServicoSetor{
     
     return retorno;
     }
+
+    @Override
+    public Setor ConsultarPorIdU(Long id) throws SetorInexistenteException {
+        Setor setorAtualizar = repositorioSetor.findById(id);
+        if(setorAtualizar==null || !setorAtualizar.isAtivo())
+            throw new SetorInexistenteException();
+        return setorAtualizar; 
+    }
     
 }

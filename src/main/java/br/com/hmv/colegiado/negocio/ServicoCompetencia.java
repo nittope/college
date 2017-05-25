@@ -25,4 +25,6 @@ public interface ServicoCompetencia extends Serializable{
     public List<CompetenciaListar> ConsultarPorNome(String nome) throws CompetenciaInexistenteException;
     public List<CompetenciaListar> ConsultarPorID(Long id) throws CompetenciaInexistenteException;
     
+    public Competencia ConsultarPorIdU(Long id) throws CompetenciaInexistenteException;
+    
 }

@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.css"/>  
         <script src="../resources/js/bootstrap.min.js"></script>
+        <script src="../resources/js/dado-indicador.js"></script>
     </head>
     <body>
         <div class="container">
@@ -37,11 +38,13 @@
 				<table class="table" id="manageMemberTable">					
 					<thead>
 						<tr>
-							<th>Usuário</th>
-                                                        <th>CPF</th>                                                        
-							<th>Status</th>	
-                                                        <th>Privilégio</th>
-                                                        <th>Função</th>
+							<th>Cabeçalho</th>
+                                                        <th>Setor</th>
+                                                        <th>Competência</th>                                                        
+							<th>Indicador</th>	
+                                                        <th>Informação</th>
+                                                        <th>Feito Por</th>
+                                                        <th>Status</th>
                                                         <th>Ação</th>
 							
 						</tr>
@@ -49,6 +52,131 @@
 				</table>
 			</div>
 		</div>
+	</div>
+        <div class="modal fade" tabindex="-1" role="dialog" id="addMember">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title"><span class="glyphicon glyphicon-plus-sign"></span>	Adicionar Usuário</h4>
+	      </div>
+	      
+                <form class="form-horizontal" action="cadastrar" method="POST" id="createMemberForm" onsubmit="">
+
+	      <div class="modal-body">
+	      	<div class="messages"></div>
+
+                        <div class="form-group"> <!--/here teh addclass has-error will appear -->
+                         <label for="idUsuario" class="col-sm-2 control-label">Usuário</label>
+                         <div class="col-sm-10">                              
+                           <select id="idUsuario" class="form-control" name="idUsuario"></select>
+                           <script>
+                               $.getJSON("../usuario/listar", function(result) { 
+                                    var options = $("#idUsuario"); 
+                                    $.each(result, function(ind, item) { 
+                                        $('#idUsuario').append($('<option>', { 
+                                            value: item.id,
+                                            text : item.nome 
+                                        }));                                        
+                                    }); 
+                                }); 
+                           </script>
+                         </div>
+                        </div>
+                        <div class="form-group"> <!--/here teh addclass has-error will appear -->
+                         <label for="idSetor" class="col-sm-2 control-label">Setor</label>
+                         <div class="col-sm-10">                              
+                           <select id="idSetor" class="form-control" name="idSetor"></select>
+                           <script>
+                               $.getJSON("../setor/listar", function(result) { 
+                                    var options = $("#idSetor"); 
+                                    $.each(result, function(ind, item) { 
+                                        $('#idSetor').append($('<option>', { 
+                                            value: item.id,
+                                            text : item.nome 
+                                        }));                                        
+                                    }); 
+                                }); 
+                           </script>
+                         </div>
+                        </div>
+                        <div class="form-group"> <!--/here teh addclass has-error will appear -->
+                         <label for="idCompetencia" class="col-sm-2 control-label">Competência</label>
+                         <div class="col-sm-10">                              
+                           <select id="idCompetencia" class="form-control" name="idCompetencia"></select>
+                           <script>
+                               $.getJSON("../competencia/listar", function(result) { 
+                                    var options = $("#idCompetencia"); 
+                                    $.each(result, function(ind, item) { 
+                                        $('#idCompetencia').append($('<option>', { 
+                                            value: item.id,
+                                            text : item.nome 
+                                        }));                                        
+                                    }); 
+                                }); 
+                           </script>
+                         </div>
+                        </div>
+                      <div class="form-group"> <!--/here teh addclass has-error will appear -->
+                         <label for="idCabecalho" class="col-sm-2 control-label">Cabeçalho</label>
+                         <div class="col-sm-10">                              
+                           <select id="idCabecalho" class="form-control" name="idCabecalho"></select>
+                           <script>
+                               $.getJSON("../cabecalho/listar", function(result) { 
+                                    var options = $("#idCabecalho"); 
+                                    $.each(result, function(ind, item) { 
+                                        $('#idCabecalho').append($('<option>', { 
+                                            value: item.id,
+                                            text : item.nome 
+                                        }));                                        
+                                    }); 
+                                }); 
+                           </script>
+                         </div>
+                        </div>
+                <div class="form-group"> <!--/here teh addclass has-error will appear -->
+                         <label for="idIndicador" class="col-sm-2 control-label">Indicador</label>
+                         <div class="col-sm-10">                              
+                           <select id="idIndicador" class="form-control" name="idIndicador"></select>
+                           <script>
+                               $.getJSON("../indicador/listar", function(result) { 
+                                    var options = $("#idIndicador"); 
+                                    $.each(result, function(ind, item) { 
+                                        $('#idIndicador').append($('<option>', { 
+                                            value: item.id,
+                                            text : item.nome 
+                                        }));                                        
+                                    }); 
+                                }); 
+                           </script>
+                         </div>
+                        </div>
+                            <div class="form-group"> <!--/here teh addclass has-error will appear -->
+			    <label for="ativo" class="col-sm-2 control-label">Status</label>
+			    <div class="col-sm-10"> 
+                                <select class="form-control" id="ativo" name="ativo"id="ativo">
+                                <option value="true" selected="selected">Ativo</option>
+                                <option value="false">Inativo</option>                                
+                              </select>
+			    </div>
+			  </div>
+                        <div class="form-group"> <!--/here teh addclass has-error will appear -->
+                          <label for="informacao" class="col-sm-2 control-label">Informação</label>
+                          <div class="col-sm-10"> 
+                            <input type="text" class="form-control" id="informacao" name="informacao" placeholder="Informação">
+                              <!-- here the text will apper  -->
+                          </div>
+                        </div>
+			  		
+
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" id="modal" data-modal="modal" data-dismiss="modal">Fechar</button>
+	        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+	      </div>
+	      </form> 
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
 	</div>
     </body>
 </html>

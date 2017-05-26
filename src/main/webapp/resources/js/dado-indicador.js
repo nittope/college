@@ -49,11 +49,13 @@
                                         
 					manageMemberTable.row.add([
 											
-						obj.nome,
-                                                obj.cpf,                                                
+						obj.cabecalhoNome,
+                                                obj.setorNome,                                                
+                                                obj.competenciaNome,
+                                                obj.indicadorNome, 
+                                                obj.informacao,
+                                                obj.usuarioNome,
                                                 obj.ativo,
-                                                obj.authority, 
-                                                obj.funcaoNome,
                                                 "<button type='button' value='"+obj.id+"'id='"+obj.id+"' data-target='#editMemberModal' onclick='editMember(id);'><span class='glyphicon glyphicon-edit'></span></button>"
 					]).draw();
                                         

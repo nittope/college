@@ -63,6 +63,9 @@
                      <li>
                         <a href="competencia/view">Competencia</a>
                     </li> 
+                    <li>
+                        <a href="dadoIndicador/view">Add - Colegiado</a>
+                    </li> 
                     
                 </ul>
             </div>

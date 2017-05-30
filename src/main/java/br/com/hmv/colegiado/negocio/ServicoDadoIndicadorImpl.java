@@ -60,7 +60,7 @@ public class ServicoDadoIndicadorImpl implements ServicoDadoIndicador{
         Indicador indicador = servicoIndicador.ConsultarPorIdU(idIndicador);
         
         dadoIndicador.setAtivo(dadoIndicador.isAtivo());
-        dadoIndicador.setInformacao(dadoIndicador.getInformacao());        
+        dadoIndicador.setInformacao(dadoIndicador.getInformacao());      
         dadoIndicador.setSetor(setor);
         dadoIndicador.setCompetencia(competencia);
         dadoIndicador.setUsuario(usuario);

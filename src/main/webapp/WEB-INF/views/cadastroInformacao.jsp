@@ -138,14 +138,14 @@
                         </div>
                         
                          <div class="form-group"> <!--/here teh addclass has-error will appear -->
-                         <label for="idIndicador" class="col-sm-2 control-label">Indicador</label>
+                         <label for="nome" class="col-sm-2 control-label">Indicador</label>
                          <div class="col-sm-10">                              
-                           <select id="idIndicador" class="form-control" name="idIndicador"></select>
+                           <select id="nome" class="form-control" name="idIndicador"></select>
                            <script>
                                $.getJSON("listarIndicadoresAtivos", function(result) { 
-                                    var options = $("#idIndicador"); 
+                                    var options = $("#nome"); 
                                     $.each(result, function(ind, item) { 
-                                        $('#idIndicador').append($('<option>', { 
+                                        $('#nome').append($('<option>', { 
                                             value: item.id,
                                             text : item.nome 
                                         }));                                        

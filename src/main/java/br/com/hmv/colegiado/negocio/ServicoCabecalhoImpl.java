@@ -117,5 +117,22 @@ public class ServicoCabecalhoImpl implements ServicoCabecalho {
             throw new CabecalhoInexistenteException();
         return cabecalhoAtualizar; 
     }
+
+    @Override
+    public List<CabecalhoListar> listarTodosCabecalhosAtivos() {
+        List<CabecalhoListar> retorno = new ArrayList<CabecalhoListar>();
+        List<Cabecalho> pesquisa = (List<Cabecalho>) repositorioCabecalho.findAll();
+        for(int i = 0;i < pesquisa.size(); i++){
+            if(pesquisa.get(i).isAtivo()==true){
+                CabecalhoListar cl = new CabecalhoListar();
+                cl.setId(pesquisa.get(i).getId());
+                cl.setNome(pesquisa.get(i).getNome());
+                cl.setAtivo(pesquisa.get(i).isAtivo());
+                
+                retorno.add(cl);            }
+            
+        }
+        return retorno;
+    }
     
 }

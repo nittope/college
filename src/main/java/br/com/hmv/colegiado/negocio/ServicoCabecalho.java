@@ -22,6 +22,7 @@ public interface ServicoCabecalho extends Serializable {
     public void atualizar(Cabecalho cabecalho) throws CabecalhoInexistenteException;
     public void remover(Cabecalho cabecalho) throws CabecalhoInexistenteException;
     public List<CabecalhoListar> listarTodos();
+    public List<CabecalhoListar> listarTodosCabecalhosAtivos();
     public List<CabecalhoListar> ConsultarPorNome(String nome) throws CabecalhoInexistenteException;
     public List<CabecalhoListar> ConsultarPorID(Long id) throws CabecalhoInexistenteException;
     

@@ -21,6 +21,7 @@ public interface ServicoCompetencia extends Serializable{
     public void cadastrar(Competencia competencia) throws CompetenciaExistenteException, CompetenciaInexistenteException;
     public void atualizar(Competencia competencia) throws CompetenciaInexistenteException;
     public void remover(Competencia competencia) throws CompetenciaInexistenteException;
+    public List<CompetenciaListar> listarTodasCompetenciasAtivas();
     public List<CompetenciaListar> listarTodos();
     public List<CompetenciaListar> ConsultarPorNome(String nome) throws CompetenciaInexistenteException;
     public List<CompetenciaListar> ConsultarPorID(Long id) throws CompetenciaInexistenteException;

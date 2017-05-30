@@ -25,7 +25,7 @@
 		<div class="row">
 			<div class="col-md-12">
 
-				<center><h1 class="page-header">Gerenciamento de Informações </h1> </center>
+				<center><h1 class="page-header">Gerenciamento de Usuários </h1> </center>
 
 				<div class="removeMessages"></div>
 
@@ -53,7 +53,9 @@
 			</div>
 		</div>
 	</div>
-        <div class="modal fade" tabindex="-1" role="dialog" id="addMember">
+
+	<!-- add modal -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="addMember">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -61,7 +63,7 @@
 	        <h4 class="modal-title"><span class="glyphicon glyphicon-plus-sign"></span>	Adicionar Usuário</h4>
 	      </div>
 	      
-                <form class="form-horizontal" action="cadastrar" method="POST" id="createMemberForm" onsubmit="">
+                <form class="form-horizontal" action="cadastrar" method="POST" id="createMemberForm" onsubmit="recarregar()">
 
 	      <div class="modal-body">
 	      	<div class="messages"></div>
@@ -71,7 +73,7 @@
                          <div class="col-sm-10">                              
                            <select id="idUsuario" class="form-control" name="idUsuario"></select>
                            <script>
-                               $.getJSON("../usuario/listar", function(result) { 
+                               $.getJSON("listarUsuariosAtivos", function(result) { 
                                     var options = $("#idUsuario"); 
                                     $.each(result, function(ind, item) { 
                                         $('#idUsuario').append($('<option>', { 
@@ -88,7 +90,7 @@
                          <div class="col-sm-10">                              
                            <select id="idSetor" class="form-control" name="idSetor"></select>
                            <script>
-                               $.getJSON("../setor/listar", function(result) { 
+                               $.getJSON("listarSetoresAtivos", function(result) { 
                                     var options = $("#idSetor"); 
                                     $.each(result, function(ind, item) { 
                                         $('#idSetor').append($('<option>', { 
@@ -105,7 +107,7 @@
                          <div class="col-sm-10">                              
                            <select id="idCompetencia" class="form-control" name="idCompetencia"></select>
                            <script>
-                               $.getJSON("../competencia/listar", function(result) { 
+                               $.getJSON("listarCompetenciasAtivas", function(result) { 
                                     var options = $("#idCompetencia"); 
                                     $.each(result, function(ind, item) { 
                                         $('#idCompetencia').append($('<option>', { 
@@ -117,12 +119,12 @@
                            </script>
                          </div>
                         </div>
-                      <div class="form-group"> <!--/here teh addclass has-error will appear -->
+                       <div class="form-group"> <!--/here teh addclass has-error will appear -->
                          <label for="idCabecalho" class="col-sm-2 control-label">Cabeçalho</label>
                          <div class="col-sm-10">                              
                            <select id="idCabecalho" class="form-control" name="idCabecalho"></select>
                            <script>
-                               $.getJSON("../cabecalho/listar", function(result) { 
+                               $.getJSON("listarCabecalhosAtivos", function(result) { 
                                     var options = $("#idCabecalho"); 
                                     $.each(result, function(ind, item) { 
                                         $('#idCabecalho').append($('<option>', { 
@@ -134,12 +136,13 @@
                            </script>
                          </div>
                         </div>
-                <div class="form-group"> <!--/here teh addclass has-error will appear -->
+                        
+                         <div class="form-group"> <!--/here teh addclass has-error will appear -->
                          <label for="idIndicador" class="col-sm-2 control-label">Indicador</label>
                          <div class="col-sm-10">                              
                            <select id="idIndicador" class="form-control" name="idIndicador"></select>
                            <script>
-                               $.getJSON("../indicador/listar", function(result) { 
+                               $.getJSON("listarIndicadoresAtivos", function(result) { 
                                     var options = $("#idIndicador"); 
                                     $.each(result, function(ind, item) { 
                                         $('#idIndicador').append($('<option>', { 
@@ -151,7 +154,7 @@
                            </script>
                          </div>
                         </div>
-                            <div class="form-group"> <!--/here teh addclass has-error will appear -->
+                        <div class="form-group"> <!--/here teh addclass has-error will appear -->
 			    <label for="ativo" class="col-sm-2 control-label">Status</label>
 			    <div class="col-sm-10"> 
                                 <select class="form-control" id="ativo" name="ativo"id="ativo">
@@ -160,7 +163,7 @@
                               </select>
 			    </div>
 			  </div>
-                        <div class="form-group"> <!--/here teh addclass has-error will appear -->
+                         <div class="form-group"> <!--/here teh addclass has-error will appear -->
                           <label for="informacao" class="col-sm-2 control-label">Informação</label>
                           <div class="col-sm-10"> 
                             <input type="text" class="form-control" id="informacao" name="informacao" placeholder="Informação">
@@ -177,6 +180,143 @@
 	      </form> 
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->
-	</div>
+	</div><!-- /.modal -->
+	<!-- /add modal -->
+
+	
+
+	<!-- edit modal -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="editMemberModal">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title"><span class="glyphicon glyphicon-edit"></span> Editar Informação</h4>
+	      </div>
+
+		<form class="form-horizontal" action="atualizar" method="POST" id="updateMemberForm" >	      
+
+                    <div class="modal-body">
+
+                        <div class="edit-messages"></div>
+                          <div class="form-group"> <!--/here teh addclass has-error will appear -->
+                         <label for="editIdUsuario" class="col-sm-2 control-label">Usuário</label>
+                         <div class="col-sm-10">                              
+                           <select id="editIdUsuario" class="form-control" name="idUsuario"></select>
+                           <script>
+                               $.getJSON("../usuario/listar", function(result) { 
+                                    var options = $("#editIdUsuario"); 
+                                    $.each(result, function(ind, item) { 
+                                        $('#editIdUsuario').append($('<option>', { 
+                                            value: item.id,
+                                            text : item.nome 
+                                        }));                                        
+                                    }); 
+                                }); 
+                           </script>
+                         </div>
+                        </div>
+                        <div class="form-group"> <!--/here teh addclass has-error will appear -->
+                         <label for="editIdSetor" class="col-sm-2 control-label">Setor</label>
+                         <div class="col-sm-10">                              
+                           <select id="editIdSetor" class="form-control" name="idSetor"></select>
+                           <script>
+                               $.getJSON("../setor/listar", function(result) { 
+                                    var options = $("#editIdSetor"); 
+                                    $.each(result, function(ind, item) { 
+                                        $('#editIdSetor').append($('<option>', { 
+                                            value: item.id,
+                                            text : item.nome 
+                                        }));                                        
+                                    }); 
+                                }); 
+                           </script>
+                         </div>
+                        </div>
+                        <div class="form-group"> <!--/here teh addclass has-error will appear -->
+                         <label for="editIdCompetencia" class="col-sm-2 control-label">Competência</label>
+                         <div class="col-sm-10">                              
+                           <select id="editIdCompetencia" class="form-control" name="idCompetencia"></select>
+                           <script>
+                               $.getJSON("../competencia/listar", function(result) { 
+                                    var options = $("#editIdCompetencia"); 
+                                    $.each(result, function(ind, item) { 
+                                        $('#editIdCompetencia').append($('<option>', { 
+                                            value: item.id,
+                                            text : item.nome 
+                                        }));                                        
+                                    }); 
+                                }); 
+                           </script>
+                         </div>
+                        </div>
+                       <div class="form-group"> <!--/here teh addclass has-error will appear -->
+                         <label for="editIdCabecalho" class="col-sm-2 control-label">Cabeçalho</label>
+                         <div class="col-sm-10">                              
+                           <select id="editIdCabecalho" class="form-control" name="idCabecalho"></select>
+                           <script>
+                               $.getJSON("../cabecalho/listar", function(result) { 
+                                    var options = $("#editIdCabecalho"); 
+                                    $.each(result, function(ind, item) { 
+                                        $('#editIdCabecalho').append($('<option>', { 
+                                            value: item.id,
+                                            text : item.nome 
+                                        }));                                        
+                                    }); 
+                                }); 
+                           </script>
+                         </div>
+                        </div>
+                        
+                         <div class="form-group"> <!--/here teh addclass has-error will appear -->
+                         <label for="editIdIndicador" class="col-sm-2 control-label">Indicador</label>
+                         <div class="col-sm-10">                              
+                           <select id="editIdIndicador" class="form-control" name="idIndicador"></select>
+                           <script>
+                               $.getJSON("../indicador/listar", function(result) { 
+                                    var options = $("#editIdIndicador"); 
+                                    $.each(result, function(ind, item) { 
+                                        $('#editIdIndicador').append($('<option>', { 
+                                            value: item.id,
+                                            text : item.nome 
+                                        }));                                        
+                                    }); 
+                                }); 
+                           </script>
+                         </div>
+                        </div>
+                        <div class="form-group"> <!--/here teh addclass has-error will appear -->
+			    <label for="editAtivo" class="col-sm-2 control-label">Status</label>
+			    <div class="col-sm-10"> 
+                                <select class="form-control" id="editAtivo" name="ativo" >
+                                <option value="true" selected="selected">Ativo</option>
+                                <option value="false">Inativo</option>                                
+                              </select>
+			    </div>
+			  </div>
+                         <div class="form-group"> <!--/here teh addclass has-error will appear -->
+                          <label for="editInformacao" class="col-sm-2 control-label">Informação</label>
+                          <div class="col-sm-10"> 
+                            <input type="text" class="form-control" id="editInformacao" name="informacao" placeholder="Informação">
+                              <!-- here the text will apper  -->
+                          </div>
+                        </div>
+                        
+                    </div>
+                    <div class="modal-footer editMemberModal">
+                        <button type="button" class="btn btn-default" id="modal"  data-modal="modal" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary" > Salvar alterações</button>
+                    </div>
+                    </form>
+
+                   
+                        
+	      
+	      
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	<!-- /edit modal -->
+
     </body>
 </html>

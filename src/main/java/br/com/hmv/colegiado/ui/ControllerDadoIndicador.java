@@ -60,7 +60,7 @@ public class ControllerDadoIndicador {
     @RequestMapping(value = "/cadastrar", headers="Accept=*/*", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<?> adicionarDadoIndicador(DadoIndicador dadoIndicador, Long idSetor, Long idCompetencia, Long idUsuario, Long idCabecalho, Long idIndicador) {
         try {
-            fachada.cadastrarDadoIndicador(dadoIndicador, idSetor, idCompetencia, idUsuario, idCabecalho, idIndicador);
+            fachada.cadastrarDadoIndicador(dadoIndicador,idSetor,idCompetencia,idUsuario,idCabecalho,idIndicador);
             return new ResponseEntity<String>(HttpStatus.OK);
         }  catch (SetorInexistenteException ex) {
             return new ResponseEntity<SetorInexistenteException>(ex, HttpStatus.BAD_REQUEST);
@@ -143,6 +143,32 @@ public class ControllerDadoIndicador {
         } catch (IndicadorInexistenteException ex) {
             return null;
         }
+    }
+    
+    @RequestMapping(value = "/listarIndicadoresAtivos", headers="Accept=*/*", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<IndicadorListar> listarIndicadoresAtivos(){
+         return fachada.listarTodosIndicadores();
+    }
+    
+    
+    @RequestMapping(value = "/listarCabecalhosAtivos", headers="Accept=*/*", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<CabecalhoListar> listarCabecalhosAtivos(){
+         return fachada.listarTodosCabecalhos();
+    }
+    
+     @RequestMapping(value = "/listarCompetenciasAtivas", headers="Accept=*/*", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<CompetenciaListar> listarCompetenciasAtivas(){
+         return fachada.listarTodasAsCompetencias();
+    }
+    
+    @RequestMapping(value = "/listarUsuariosAtivos", headers="Accept=*/*", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<UsuarioListar> listarUsuariosAtivos(){
+         return fachada.listarTodosUsuarios();
+    }
+    
+    @RequestMapping(value = "/listarSetoresAtivos", headers="Accept=*/*", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<SetorListar> listarSetoresAtivos(){
+         return fachada.listarTodosSetores();
     }
     
     @RequestMapping("/view")

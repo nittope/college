@@ -138,5 +138,25 @@ public class ServicoCompetenciaImpl implements ServicoCompetencia {
             throw new CompetenciaInexistenteException();
         return competenciaAtualizar; 
     }
+
+    @Override
+    public List<CompetenciaListar> listarTodasCompetenciasAtivas() {
+        List<CompetenciaListar> retorno = new ArrayList<CompetenciaListar>();
+        List<Competencia> pesquisa = (List<Competencia>) repositorioCompetencia.findAll();
+        for(int i = 0;i < pesquisa.size(); i++){
+            if(pesquisa.get(i).isAtivo()==true){
+                 CompetenciaListar cl = new CompetenciaListar();
+                cl.setId(pesquisa.get(i).getId());
+                cl.setNome(pesquisa.get(i).getNome());
+                cl.setAtivo(pesquisa.get(i).isAtivo());
+                cl.setDescricao(pesquisa.get(i).getDescricao());
+                cl.setDataIni(pesquisa.get(i).getDataIni());
+                cl.setDataFim(pesquisa.get(i).getDataFim());
+                
+                retorno.add(cl);    }
+            
+        }
+        return retorno;
+    }
     
 }

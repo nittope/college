@@ -145,6 +145,7 @@
 							  '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
 							  '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>'+response.messages+
 							'</div>');
+                                                
 						}  // /else
                                
 					} // success  
@@ -201,19 +202,15 @@ function editMember(id) {
                                             document.getElementById("editAtivo").selectedIndex = "1";
                                         }
                                         
-                                        if (obj.authority == 'ROLE_USER'){
-                                            document.getElementById("editAuthority").selectedIndex = "0";
-                                        }
-                                        if (obj.authority == 'ROLE_ADMIN'){
-                                            document.getElementById("editAuthority").selectedIndex = "1";
-                                        }  
+                                        
 					
 				
 		
-                                $("#editNome").val(obj.nome);
-                                $("#editFuncao").val(obj.funcao);
-                                $("#editCpf").val(obj.cpf);
-                                $("#editSenha").val(obj.senha);
+                                $("#editIdUsuario").val(obj.usuarioNome);
+                                $("#editIdSetor").val(obj.setorNome);
+                                $("#editIdCompetencia").val(obj.competenciaNome);
+                                $("#editIdCabecalho").val(obj.cabecalhoNome);                               
+                                $("#editIdIndicador").val(obj.indicadorNome);
                                 
                                 
                                 
